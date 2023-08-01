@@ -87,6 +87,11 @@
     }
 }
 
+.filepicker-filelist .filepicker-container, .filemanager.fm-noitems .fm-empty-container {
+    position: static;
+    padding-bottom: 8px;
+}
+
 @include media-breakpoint-down(md) {
     .activity-navigation {
         .larrow,
