@@ -174,3 +174,9 @@
         color: #1d2125;
     }
 }
+
+@include media-breakpoint-down(md) {
+    .dropdown-item {
+        white-space: wrap;
+    }
+}
