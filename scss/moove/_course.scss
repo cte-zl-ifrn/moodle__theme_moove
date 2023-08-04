@@ -16,6 +16,21 @@
             margin-left: auto;
         }
     }
+    #participantsform {
+        .no-overflow {
+            overflow: scroll;
+        }
+        #formactionid {
+            width: 100%;
+            margin-bottom: 8px;
+        }
+    } 
+}
+
+#page-grade-report-grader-index {
+    .gradeparent {
+        overflow: scroll;
+    }
 }
 
 .activity-navigation {
