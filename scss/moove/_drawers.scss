@@ -54,7 +54,7 @@
 }
 
 .drawer-toggles .drawer-toggler {
-    top: 80px;
+    top: 260px;
 
     .btn {
         background-color: $brand-primary;
@@ -70,7 +70,7 @@ body.has-secondarynavigation {
 
     .drawer-toggles .drawer-toggler {
         position: fixed;
-        top: 260px; //140
+        top: 260px;
     }
 }
 
