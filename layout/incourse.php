@@ -119,7 +119,9 @@ $templatecontext = [
     'hasregionmainsettingsmenu' => !empty($regionmainsettingsmenu),
     'overflow' => $overflow,
     'headercontent' => $headercontent,
-    'addblockbutton' => $addblockbutton
+    'addblockbutton' => $addblockbutton,
+    'btncursolink' => $CFG->wwwroot.'/course/view.php?id='.$COURSE->id,
+    'btncursotitulo' => get_string('btncursotitulo', 'theme_moove'),
 ];
 
 $templatecontext = array_merge($templatecontext, $themesettings->footer());

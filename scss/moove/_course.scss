@@ -4,7 +4,16 @@
     }
 }
 
+
+#btncursovoltar{
+    display: none;
+}
+
+
 .pagelayout-incourse {
+    #btncursovoltar {
+        display: list-item;
+    }
     #topofscroll {
         padding-top: 0 !important;
     }
