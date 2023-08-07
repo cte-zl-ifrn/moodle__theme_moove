@@ -176,4 +176,4 @@ $string['privacy:thememoovesettings_fonttype'] = 'The current preference for the
 $string['privacy:thememoovesettings_enableaccessibilitytoolbar'] = 'The current preference for enable accessibility toolbar is to show it.';
 
 // Course custom strings
-$string['btncursotitulo'] = 'Voltar';
+$string['btncursotitulo'] = 'Conteúdo';
