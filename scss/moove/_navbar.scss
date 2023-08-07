@@ -59,7 +59,7 @@
         .nav-tabs {
             border: none;
             background-color: inherit;
-            max-width: none;
+            max-width: none !important;
 
             .nav-link {
                 display: flex;
