@@ -74,6 +74,27 @@ body.has-secondarynavigation {
     }
 }
 
+.courseindex .courseindex-section {
+    .courseindex-item {
+        border-bottom: 1px solid rgba(0,0,0,.125);
+        position: relative;
+        .courseindex-chevron {
+            display: flex;
+            width: 100%;
+        }
+        .courseindex-link {
+            position: absolute;
+            left: 30px;
+        }
+    }
+    .courseindex-item-content{
+        .courseindex-link {
+            position:static;
+            width: 100%;
+        }
+    }
+}
+
 @include media-breakpoint-up(md) {
     .pagelayout-course #page.drawers .main-inner {
         max-width: 100%;
