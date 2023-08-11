@@ -4,11 +4,21 @@
     }
 }
 
+body:not(.course-1) {
+    .page-context-header{
+        flex-wrap: wrap;
+    }
+}
+
+#nomecurto {
+    margin-top: 4px;
+    margin-bottom: 0px;
+    flex-basis: 100%;
+}
 
 #btncursovoltar{
     display: none;
-}
-
+} 
 
 .pagelayout-incourse {
     #btncursovoltar {

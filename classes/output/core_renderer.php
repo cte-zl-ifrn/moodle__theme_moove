@@ -37,7 +37,8 @@ use theme_moove\output\core_course\activity_navigation;
  * @copyright  2022 Willian Mano {@link https://conecti.me}
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class core_renderer extends \theme_boost\output\core_renderer {
+class core_renderer extends \theme_boost\output\core_renderer
+{
     /**
      * The standard tags (meta tags, links to stylesheets and JavaScript, etc.)
      * that should be included in the <head> tag. Designed to be called in theme
@@ -45,7 +46,8 @@ class core_renderer extends \theme_boost\output\core_renderer {
      *
      * @return string HTML fragment.
      */
-    public function standard_head_html() {
+    public function standard_head_html()
+    {
         $output = parent::standard_head_html();
 
         $googleanalyticscode = "<script
@@ -72,8 +74,8 @@ class core_renderer extends \theme_boost\output\core_renderer {
         $output .= '<link rel="preconnect" href="https://fonts.googleapis.com">
                        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
                        <link href="https://fonts.googleapis.com/css2?family='
-                        . $sitefont .
-                       ':ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">';
+            . $sitefont .
+            ':ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">';
 
         return $output;
     }
@@ -89,7 +91,8 @@ class core_renderer extends \theme_boost\output\core_renderer {
      *
      * @since Moodle 2.5.1 2.6
      */
-    public function body_attributes($additionalclasses = array()) {
+    public function body_attributes($additionalclasses = array())
+    {
         $hasaccessibilitybar = get_user_preferences('thememoovesettings_enableaccessibilitytoolbar', '');
         if ($hasaccessibilitybar) {
             $additionalclasses[] = 'hasaccessibilitybar';
@@ -114,7 +117,7 @@ class core_renderer extends \theme_boost\output\core_renderer {
             $additionalclasses = explode(' ', $additionalclasses);
         }
 
-        return ' id="'. $this->body_id().'" class="'.$this->body_css_classes($additionalclasses).'"';
+        return ' id="' . $this->body_id() . '" class="' . $this->body_css_classes($additionalclasses) . '"';
     }
 
     /**
@@ -122,7 +125,8 @@ class core_renderer extends \theme_boost\output\core_renderer {
      *
      * @return bool
      */
-    public function should_display_logo() {
+    public function should_display_logo()
+    {
         if ($this->should_display_theme_logo() || parent::should_display_navbar_logo()) {
             return true;
         }
@@ -135,7 +139,8 @@ class core_renderer extends \theme_boost\output\core_renderer {
      *
      * @return bool
      */
-    public function should_display_theme_logo() {
+    public function should_display_theme_logo()
+    {
         $logo = $this->get_theme_logo_url();
 
         return !empty($logo);
@@ -146,7 +151,8 @@ class core_renderer extends \theme_boost\output\core_renderer {
      *
      * @return string
      */
-    public function get_logo() {
+    public function get_logo()
+    {
         $logo = $this->get_theme_logo_url();
 
         if ($logo) {
@@ -167,7 +173,8 @@ class core_renderer extends \theme_boost\output\core_renderer {
      *
      * @return string
      */
-    public function get_theme_logo_url() {
+    public function get_theme_logo_url()
+    {
         $theme = theme_config::load('moove');
 
         return $theme->setting_file_url('logo', 'logo');
@@ -179,15 +186,19 @@ class core_renderer extends \theme_boost\output\core_renderer {
      * @param \core_auth\output\login $form The renderable.
      * @return string
      */
-    public function render_login(\core_auth\output\login $form) {
+    public function render_login(\core_auth\output\login $form)
+    {
         global $SITE, $CFG;
 
         $context = $form->export_for_template($this);
 
         $context->errorformatted = $this->error_text($context->error);
         $context->logourl = $this->get_logo();
-        $context->sitename = format_string($SITE->fullname, true,
-            ['context' => context_course::instance(SITEID), "escape" => false]);
+        $context->sitename = format_string(
+            $SITE->fullname,
+            true,
+            ['context' => context_course::instance(SITEID), "escape" => false]
+        );
 
         if (!$CFG->auth_instructions) {
             $context->instructions = null;
@@ -220,7 +231,8 @@ class core_renderer extends \theme_boost\output\core_renderer {
      * @param array $customattribs Array of custom attributes for the support email anchor tag.
      * @return string The html code for the support email link.
      */
-    public function supportemail(array $customattribs = []): string {
+    public function supportemail(array $customattribs = []): string
+    {
         global $CFG;
 
         $label = get_string('contactsitesupport', 'admin');
@@ -247,7 +259,8 @@ class core_renderer extends \theme_boost\output\core_renderer {
      * @since Moodle 2.5.1 2.6
      * @return moodle_url The moodle_url for the favicon
      */
-    public function favicon() {
+    public function favicon()
+    {
         global $CFG;
 
         $theme = theme_config::load('moove');
@@ -270,7 +283,8 @@ class core_renderer extends \theme_boost\output\core_renderer {
      * @param \context_header $contextheader Header bar object.
      * @return string HTML for the header bar.
      */
-    protected function render_context_header(\context_header $contextheader) {
+    protected function render_context_header(\context_header $contextheader)
+    {
         if ($this->page->pagelayout == 'mypublic') {
             return '';
         }
@@ -297,6 +311,11 @@ class core_renderer extends \theme_boost\output\core_renderer {
             $heading = $prefix . $heading;
         }
         $html .= html_writer::tag('div', $heading, array('class' => 'page-header-headings'));
+
+        $nomeCurto = $this->page->course->shortname;
+        if ($this->page->course->id !== '1' && !isset($contextheader->imagedata)) {
+            $html .= html_writer::tag('p', $nomeCurto, array('id' => 'nomecurto'));
+        }
 
         // Buttons.
         if (isset($contextheader->additionalbuttons)) {
@@ -335,11 +354,13 @@ class core_renderer extends \theme_boost\output\core_renderer {
      *
      * @return string the navigation HTML.
      */
-    public function activity_navigation() {
+    public function activity_navigation()
+    {
         // First we should check if we want to add navigation.
         $context = $this->page->context;
         if (($this->page->pagelayout !== 'incourse' && $this->page->pagelayout !== 'frametop')
-            || $context->contextlevel != CONTEXT_MODULE) {
+            || $context->contextlevel != CONTEXT_MODULE
+        ) {
             return '';
         }
 
@@ -416,7 +437,8 @@ class core_renderer extends \theme_boost\output\core_renderer {
      *
      * @return string Final html code.
      */
-    public function get_navbar_callbacks_data() {
+    public function get_navbar_callbacks_data()
+    {
         $callbacks = get_plugins_with_function('moove_additional_header', 'lib.php');
 
         if (!$callbacks) {
@@ -441,7 +463,8 @@ class core_renderer extends \theme_boost\output\core_renderer {
      *
      * @return string Final html code.
      */
-    public function get_module_footer_callbacks_data() {
+    public function get_module_footer_callbacks_data()
+    {
         $callbacks = get_plugins_with_function('moove_module_footer', 'lib.php');
 
         if (!$callbacks) {
