@@ -184,6 +184,22 @@
     }
 }
 
+#btncursovoltar{
+    display: none;
+} 
+
+.pagelayout-incourse, .pagelayout-course, .pagelayout-admin, .pagelayout-report {
+    #btncursovoltar {
+        display: list-item;
+    }
+    #topofscroll {
+        padding-top: 0 !important;
+    }
+    li[data-key="coursehome"] {
+        display: none;
+    }
+}
+
 @include media-breakpoint-down(md) {
     .dropdown-item {
         white-space: wrap;

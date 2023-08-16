@@ -120,7 +120,9 @@ $templatecontext = [
     'overflow' => $overflow,
     'headercontent' => $headercontent,
     'addblockbutton' => $addblockbutton,
-    'enablecourseindex' => $themesettings->enablecourseindex
+    'enablecourseindex' => $themesettings->enablecourseindex,
+    'btncursolink' => $CFG->wwwroot.'/course/view.php?id='.$COURSE->id,
+    'btncursotitulo' => get_string('btncursotitulo', 'theme_moove'),
 ];
 
 $templatecontext = array_merge($templatecontext, $themesettings->footer());

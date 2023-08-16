@@ -48,7 +48,7 @@
 <nav class="moremenu navigation">
     <ul id="moremenu-{{moremenuid}}-{{navbarstyle}}" role="{{#istablist}}tablist{{/istablist}}{{^istablist}}menubar{{/istablist}}" class="nav more-nav {{navbarstyle}}">
         {{#nodecollection}}
-            <li id="btncursovoltar"><a class="nav-link" href="{{btncursolink}}">{{btncursotitulo}}</a></li>
+            <li class="nav-item" id="btncursovoltar"><a class="nav-link" href="{{btncursolink}}">{{btncursotitulo}}</a></li>
             {{#children}}
                 {{> core/moremenu_children}}
             {{/children}}
@@ -69,4 +69,12 @@
     require(['core/moremenu'], function(moremenu) {
         moremenu(document.querySelector('#moremenu-{{moremenuid}}-{{navbarstyle}}'));
     });
+
+    btncursovoltar = document.querySelector('#btncursovoltar a');
+    const body = document.querySelector('#page-course-view-topics');
+    if(body) {
+        if(body.classList.contains('pagelayout-course') ) {
+            btncursovoltar.classList.add('active');
+        }
+    }
 {{/js}}
