@@ -47,8 +47,8 @@
 }}
 <nav class="moremenu navigation">
     <ul id="moremenu-{{moremenuid}}-{{navbarstyle}}" role="{{#istablist}}tablist{{/istablist}}{{^istablist}}menubar{{/istablist}}" class="nav more-nav {{navbarstyle}}">
+        <li class="nav-item" id="btncursovoltar"><a class="nav-link" href="{{btncursolink}}">{{btncursotitulo}}</a></li>
         {{#nodecollection}}
-            <li class="nav-item" id="btncursovoltar"><a class="nav-link" href="{{btncursolink}}">{{btncursotitulo}}</a></li>
             {{#children}}
                 {{> core/moremenu_children}}
             {{/children}}

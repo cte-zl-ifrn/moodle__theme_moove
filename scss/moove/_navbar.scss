@@ -184,8 +184,17 @@
     }
 }
 
-#btncursovoltar{
+#btncursovoltar {
     display: none;
+    a {
+        color: white;
+    }
+    a:hover {
+        background-color: darken($brand-primary, 10%);
+    }
+    :not(.active) {
+        border-bottom: none;
+    }
 } 
 
 .pagelayout-incourse, .pagelayout-course, .pagelayout-admin, .pagelayout-report {
