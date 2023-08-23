@@ -4,10 +4,16 @@
     }
 }
 
-.pagelayout-incourse {
-    #topofscroll {
-        padding-top: 0 !important;
+body:not(.course-1) {
+    .page-context-header{
+        flex-wrap: wrap;
     }
+}
+
+#nomecurto {
+    margin-top: 4px;
+    margin-bottom: 0px;
+    flex-basis: 100%;
 }
 
 #page-course-view-participants {
@@ -15,6 +21,21 @@
         .navitem:last-of-type {
             margin-left: auto;
         }
+    }
+    #participantsform {
+        .no-overflow {
+            overflow: scroll;
+        }
+        #formactionid {
+            width: 100%;
+            margin-bottom: 8px;
+        }
+    } 
+}
+
+#page-grade-report-grader-index {
+    .gradeparent {
+        overflow: scroll;
     }
 }
 
@@ -85,6 +106,11 @@
             background: transparent url('[[pix:theme|right-arrow]]') no-repeat 50% 50%;
         }
     }
+}
+
+.filepicker-filelist .filepicker-container, .filemanager.fm-noitems .fm-empty-container {
+    position: static;
+    padding-bottom: 8px;
 }
 
 @include media-breakpoint-down(md) {

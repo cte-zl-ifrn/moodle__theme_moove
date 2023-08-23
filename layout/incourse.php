@@ -71,16 +71,16 @@ if (!$courseindex) {
 
 $forceblockdraweropen = $OUTPUT->firstview_fakeblocks();
 
-$secondarynavigation = false;
+$secondarynavigation = true;
 $overflow = '';
 if ($PAGE->has_secondary_navigation()) {
     $secondary = $PAGE->secondarynav;
 
+    $extraclasses[] = 'has-secondarynavigation';
     if ($secondary->get_children_key_list()) {
         $tablistnav = $PAGE->has_tablist_secondary_navigation();
         $moremenu = new \core\navigation\output\more_menu($PAGE->secondarynav, 'nav-tabs', true, $tablistnav);
         $secondarynavigation = $moremenu->export_for_template($OUTPUT);
-        $extraclasses[] = 'has-secondarynavigation';
     }
 
     $overflowdata = $PAGE->secondarynav->get_overflow_menu_data();
@@ -119,7 +119,9 @@ $templatecontext = [
     'hasregionmainsettingsmenu' => !empty($regionmainsettingsmenu),
     'overflow' => $overflow,
     'headercontent' => $headercontent,
-    'addblockbutton' => $addblockbutton
+    'addblockbutton' => $addblockbutton,
+    'btncursolink' => $CFG->wwwroot.'/course/view.php?id='.$COURSE->id,
+    'btncursotitulo' => get_string('btncursotitulo', 'theme_moove'),
 ];
 
 $templatecontext = array_merge($templatecontext, $themesettings->footer());
