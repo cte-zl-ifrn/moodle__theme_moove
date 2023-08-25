@@ -197,7 +197,7 @@
     }
 } 
 
-.pagelayout-incourse, .pagelayout-course, .pagelayout-admin, .pagelayout-report {
+.pagelayout-incourse, .pagelayout-course, body:not(.course-1).pagelayout-admin, .pagelayout-report {
     #btncursovoltar {
         display: list-item;
     }
