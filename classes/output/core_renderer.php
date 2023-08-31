@@ -312,9 +312,21 @@ class core_renderer extends \theme_boost\output\core_renderer
         }
         $html .= html_writer::tag('div', $heading, array('class' => 'page-header-headings'));
 
-        $nomeCurto = $this->page->course->shortname;
-        if ($this->page->course->id !== '1' && !isset($contextheader->imagedata)) {
-            $html .= html_writer::tag('p', $nomeCurto, array('id' => 'nomecurto'));
+        
+        if ($this->page->course->id !== '1') {
+            $divShortname = "";
+            $nomeCurto = $this->page->course->shortname;
+            //Separa o shortname para a estilização no css
+            $regexShortname = '/^(\d+\.\d+\.\d+\.\w+)\.(\w+\.\d+)(?:#(\d+))?$/';
+            if (preg_match($regexShortname, $nomeCurto, $matches)) {
+                $grupo_1 = $matches[1];
+                $grupo_2 = $matches[2];
+                $grupo_3 = isset($matches[3]) ? $matches[3] : "";
+            }
+            $divShortname .= html_writer::tag('span', $grupo_1, array('class' => 'shortname1'));
+            $divShortname .= html_writer::tag('span', $grupo_2, array('class' => 'shortname2'));
+            $divShortname .= html_writer::tag('span', $grupo_3, array('class' => 'shortname3'));
+            $html .= html_writer::tag('div', $divShortname, array('id' => 'shortname'));
         }
 
         // Buttons.

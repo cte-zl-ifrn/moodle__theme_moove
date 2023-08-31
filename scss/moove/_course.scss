@@ -10,10 +10,29 @@ body:not(.course-1) {
     }
 }
 
-#nomecurto {
-    margin-top: 4px;
+.page-header-headings {
+    display: grid;
+    align-content: center;
+}
+
+#shortname {
+    margin-top: 8px;
     margin-bottom: 0px;
     flex-basis: 100%;
+    .shortname1 {
+        font-weight: 600;
+        color: #1D2125;
+    }
+    .shortname2 {
+        font-size: 12px;
+        font-weight: 500;
+        color: #54595E;
+        margin: 0px 5px;
+    }
+    .shortname3 {
+        font-weight: 500;
+        color: #54595E;
+    }
 }
 
 #page-course-view-participants {
