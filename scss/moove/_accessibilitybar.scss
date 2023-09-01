@@ -78,6 +78,13 @@ body.hasaccessibilitybar {
     }
 }
 
+body.has-secondarynavigation.hasaccessibilitybar:not(.notloggedin) {
+    #page,
+    #page.drawers {
+        margin-top: 160px;
+    }
+}
+
 @include media-breakpoint-up(md) {
     body.hasaccessibilitybar:not(.notloggedin) {
         .drawer-toggles .drawer-toggler {
@@ -93,13 +100,8 @@ body.hasaccessibilitybar {
     }
 
     body.has-secondarynavigation.hasaccessibilitybar:not(.notloggedin) {
-        #page,
-        #page.drawers {
-            margin-top: 160px;
-        }
-
         .drawer-toggles .drawer-toggler {
-            top: 170px;
+            top: 260px;
         }
 
         .drawer-left,
