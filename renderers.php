@@ -42,10 +42,9 @@ class theme_moove_core_h5p_renderer extends \core_h5p\output\renderer {
      */
     public function h5p_alter_styles(&$styles, $libraries, $embedType) {
         global $CFG;
-
         $styles[] = (object) array(
-                    'path' => $CFG->httpswwwroot . '/theme/moove/h5pStyle/h5p.css',
-                    'version' => '?ver=0.0.1',
+                    'path' => $CFG->httpswwwroot . '/theme/moove/h5p/',
+                    'version' => "?ver=" . get_config('theme_moove', "scssh5phashcode"),
         );
     }
     

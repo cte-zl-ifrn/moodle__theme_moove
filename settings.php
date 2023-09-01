@@ -167,6 +167,20 @@ if ($ADMIN->fulltree) {
     $setting->set_updatedcallback('theme_reset_all_caches');
     $page->add($setting);
 
+    // Raw SCSS to include after the content.
+    $setting = new admin_setting_scsscode('theme_moove/scssh5p', get_string('rawscssh5p', 'theme_moove'),
+        get_string('rawscssh5p_desc', 'theme_moove'), '', PARAM_RAW);
+    $setting->set_updatedcallback('moove_write_h5p_css');
+    $page->add($setting);
+
+    // // Google analytics block.
+    // $setting = new admin_setting_configtext(
+    //     'theme_moove/scssh5phashcode',
+    //     get_string('scssh5phashcode', 'theme_moove'),
+    //     get_string('scssh5phashcodedesc', 'theme_moove'), ''
+    // );
+    // $page->add($setting);
+
     // Google analytics block.
     $name = 'theme_moove/googleanalytics';
     $title = get_string('googleanalytics', 'theme_moove');
