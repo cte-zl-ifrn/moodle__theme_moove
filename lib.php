@@ -175,3 +175,23 @@ function theme_moove_pluginfile($course, $cm, $context, $filearea, $args, $force
 
     send_file_not_found();
 }
+
+
+
+function moove_write_h5p_css() {
+    $fs = get_file_storage();
+    
+    // Create file containing text 'hello world'
+    $fs->create_file_from_string(
+        [
+            'contextid' => \context_system::instance()->id,     // ID of context
+            'component' => \core_h5p\file_storage::COMPONENT,   // core_h5p
+            'filearea' => \core_h5p\file_storage::CSS_FILEAREA, // css
+            'itemid' => 0,                                      // usually = ID of row in table
+            'filepath' => '/',                                  // any path beginning and ending in /
+            'filename' => 'moove_h5p.css'                       // any filename
+        ], 
+        get_config('theme_moove', "scssh5p")
+    );
+    theme_reset_all_caches();
+}

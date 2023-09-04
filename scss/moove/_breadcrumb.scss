@@ -1,5 +1,6 @@
 .breadcrumb {
     justify-content: flex-end;
+    display: none;
 
     .breadcrumb-item + .breadcrumb-item::before {
         font: normal normal normal 12px/1 FontAwesome;

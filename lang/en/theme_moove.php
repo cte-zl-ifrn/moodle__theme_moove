@@ -69,9 +69,13 @@ $string['advancedsettings'] = 'Advanced';
 $string['rawscsspre'] = 'Raw initial SCSS';
 $string['rawscsspre_desc'] = 'In this field you can provide initialising SCSS code, it will be injected before everything else. Most of the time you will use this setting to define variables.';
 $string['rawscss'] = 'Raw SCSS';
-$string['rawscss_desc'] = 'Use this field to provide SCSS or CSS code which will be injected at the end of the style sheet.';
+$string['rawscss_desc'] = 'Use this field to provide CSS or CSS code which will be injected at the end of the style sheet.';
+$string['rawscssh5p'] = 'Raw initial CSS for h5p';
+$string['rawscssh5p_desc'] = 'In this field you can provide initialising CSS code for h5p, it will be injected before everything else. Most of the time you will use this setting to define variables.';
 $string['googleanalytics'] = 'Google Analytics V4 Code';
 $string['googleanalyticsdesc'] = 'Please enter your Google Analytics V4 code to enable analytics on your website. The code format shold be like [G-XXXXXXXXXX]';
+$string['scssh5phashcode'] = 'Versão do CSS para h5p';
+$string['scssh5phashcodedesc'] = 'Depois vamos melhorar isso·';
 
 // Frontpage settings tab.
 $string['frontpagesettings'] = 'Frontpage';
