@@ -303,6 +303,9 @@ class core_renderer extends \theme_boost\output\core_renderer
         if (isset($contextheader->imagedata)) {
             // Header specific image.
             $html .= html_writer::div($contextheader->imagedata, 'page-header-image mr-2');
+        } elseif ($this->page->course->id !== '1') {
+            $img_attributes = array('src' => '/theme/moove/pix/course.jpg', 'width' => '50', 'class' => 'page-header-image mr-2');
+            $html .= html_writer::tag('img', null, $img_attributes);
         }
 
         // Headings.
