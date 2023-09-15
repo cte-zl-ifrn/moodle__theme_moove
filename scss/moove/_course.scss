@@ -7,6 +7,7 @@
 body:not(.course-1) {
     .page-context-header{
         flex-wrap: wrap;
+        gap: 8px;
     }
 }
 
@@ -16,7 +17,6 @@ body:not(.course-1) {
 }
 
 #shortname {
-    margin-top: 8px;
     margin-bottom: 0px;
     flex-basis: 100%;
     .shortname1 {
