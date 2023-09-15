@@ -213,4 +213,10 @@
     .dropdown-item {
         white-space: wrap;
     }
+    .navbar-light .navbar-brand {
+        display: none !important;
+    }
+    .primary-navigation {
+        margin-left: 32px;
+    }
 }
