@@ -137,21 +137,28 @@ body.has-secondarynavigation {
 }
 
 @include media-breakpoint-down(md) {
-        .drawer-toggles { 
-            .drawer-left-toggle {
-                top: 10px !important;
-                z-index: 9999;
-                .btn {
-                    background: #FFF;
-                    color: #000;
-                    box-shadow: none;
-                    border-radius: 0px;
-                }
-                .btn:hover {
-                    padding-left: 10px;
-                }
+    .drawer-toggles { 
+        .drawer-left-toggle {
+            top: 10px !important;
+            z-index: 9999;
+            .btn {
+                background: #FFF;
+                color: #000;
+                box-shadow: none;
+                border-radius: 0px;
+            }
+            .btn:hover {
+                padding-left: 10px;
             }
         }
+    }
+    .hasaccessibilitybar {
+        .drawer-toggles { 
+            .drawer-left-toggle {
+                top: 50px !important;
+            }
+        }
+    }
     .drawer-left,
     .drawer-right {
         top: 0;
