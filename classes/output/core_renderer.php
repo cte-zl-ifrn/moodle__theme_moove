@@ -278,6 +278,16 @@ class core_renderer extends \theme_boost\output\core_renderer
     }
 
     /**
+     * Renders the "breadcrumb" for all pages in boost.
+     *
+     * @return string the HTML for the navbar.
+     */
+    public function navbar(): string {
+        $newnav = new \theme_moove\boostnavbar($this->page);
+        return $this->render_from_template('theme_moove/core/navbar', $newnav);
+    }
+
+    /**
      * Renders the header bar.
      *
      * @param \context_header $contextheader Header bar object.
@@ -314,23 +324,6 @@ class core_renderer extends \theme_boost\output\core_renderer
             $heading = $prefix . $heading;
         }
         $html .= html_writer::tag('div', $heading, array('class' => 'page-header-headings'));
-
-        
-        if ($this->page->course->id !== '1') {
-            $divShortname = "";
-            $nomeCurto = $this->page->course->shortname;
-            //Separa o shortname para a estilização no css
-            $regexShortname = '/^(\d+\.\d+\.\d+\.\w+)\.(\w+\.\d+)(?:#(\d+))?$/';
-            if (preg_match($regexShortname, $nomeCurto, $matches)) {
-                $grupo_1 = $matches[1];
-                $grupo_2 = $matches[2];
-                $grupo_3 = isset($matches[3]) ? $matches[3] : "";
-            }
-            $divShortname .= html_writer::tag('span', $grupo_1, array('class' => 'shortname1'));
-            $divShortname .= html_writer::tag('span', $grupo_2, array('class' => 'shortname2'));
-            $divShortname .= html_writer::tag('span', $grupo_3, array('class' => 'shortname3'));
-            $html .= html_writer::tag('div', $divShortname, array('id' => 'shortname'));
-        }
 
         // Buttons.
         if (isset($contextheader->additionalbuttons)) {
