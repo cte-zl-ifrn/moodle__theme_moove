@@ -95,6 +95,10 @@
                 height: 30px;
             }
         }
+
+        div[vw-plugin-wrapper] {
+            top: 320px;
+        }
     }
 }
 
@@ -182,6 +186,10 @@ body.has-secondarynavigation.hasaccessibilitybar:not(.notloggedin) {
             span {
                 display: none;
             }
+        }
+        div[vw-plugin-wrapper] {
+            top: 120px !important;
+            position: absolute;
         }
     }
 }
