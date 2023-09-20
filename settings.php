@@ -170,7 +170,8 @@ if ($ADMIN->fulltree) {
     // Raw SCSS to include after the content.
     $setting = new admin_setting_scsscode('theme_moove/scssh5p', get_string('rawscssh5p', 'theme_moove'),
         get_string('rawscssh5p_desc', 'theme_moove'), '', PARAM_RAW);
-    $setting->set_updatedcallback('moove_write_h5p_css');
+    $setting->set_updatedcallback('theme_reset_all_caches');
+
     $page->add($setting);
 
     // // Google analytics block.

@@ -1,7 +1,7 @@
 #accessibilitybar {
     display: none;
     padding: .2rem;
-    height: 30px;
+    height: 40px;
     background-color: $gray-100;
 
     .container-fluid {
@@ -14,6 +14,7 @@
         display: flex;
         margin-left: auto;
         margin-right: .5rem;
+        align-items: center;
 
         .fontsize,
         .sitecolor {
@@ -58,6 +59,43 @@
             background-color: #000000;
         }
     }
+
+    .usertools {
+        display: flex;
+        align-items: center;
+        position: relative;
+        left: 50%;
+
+        .userway {
+            cursor: pointer;
+            margin-right: 20px;
+
+            i {
+                color: #006BE6;
+                transform: scale(2);
+                transition: transform 0.3s;
+            }
+
+            i:hover {
+                transform: scale(2.2);
+            }
+        }
+
+        div[vw].enabled {
+            position: static;
+            transform: none !important;
+            margin: 0 !important;
+            
+            .access-button {
+                width: 30px;
+                height: 30px;
+            }
+
+            .pop-up {
+                height: 30px;
+            }
+        }
+    }
 }
 
 body.hasaccessibilitybar {
@@ -66,22 +104,23 @@ body.hasaccessibilitybar {
     }
 
     .navbar.fixed-top {
-        top: 30px;
+        top: 40px;
     }
 
     #accessibilitybar {
-        display: block;
+        display: flex;
+        align-items: center;
     }
 
     .secondary-navigation.moove {
-        margin-top: 30px;
+        margin-top: 40px;
     }
 }
 
 body.has-secondarynavigation.hasaccessibilitybar:not(.notloggedin) {
     #page,
     #page.drawers {
-        margin-top: 160px;
+        margin-top: 170px;
     }
 }
 
@@ -108,6 +147,41 @@ body.has-secondarynavigation.hasaccessibilitybar:not(.notloggedin) {
         .drawer-right {
             top: calc(160px + 1px);
             height: calc(100vh - 160px);
+        }
+    }
+}
+
+@include media-breakpoint-down(md) {
+    #accessibilitybar {
+        .bars {
+            margin: auto;
+
+            .usertools {
+                margin-right: auto;
+                position: static;
+            }
+        }
+    }
+}
+
+@include media-breakpoint-down(sm) {
+    #accessibilitybar {
+        .bars {
+            .usertools .userway {
+                margin-right: 10px;
+            }
+
+            .fontsize {
+                margin-right: auto;
+            }
+
+            .sitecolor {
+                margin-left: auto;
+            }
+            
+            span {
+                display: none;
+            }
         }
     }
 }

@@ -143,9 +143,13 @@ function theme_moove_get_precompiled_css() {
 function theme_moove_pluginfile($course, $cm, $context, $filearea, $args, $forcedownload, array $options = array()) {
     $theme = theme_config::load('moove');
 
-    if ($context->contextlevel == CONTEXT_SYSTEM &&
-        ($filearea === 'logo' || $filearea === 'loginbgimg' || $filearea == 'favicon')) {
-        $theme = theme_config::load('moove');
+    if ($context->contextlevel != CONTEXT_SYSTEM) {
+        send_file_not_found();
+    }
+
+    $theme = theme_config::load('moove');
+
+    if (($filearea === 'logo' || $filearea === 'loginbgimg' || $filearea == 'favicon')) {
         // By default, theme files must be cache-able by both browsers and proxies.
         if (!array_key_exists('cacheability', $options)) {
             $options['cacheability'] = 'public';
@@ -153,27 +157,30 @@ function theme_moove_pluginfile($course, $cm, $context, $filearea, $args, $force
         return $theme->setting_file_serve($filearea, $args, $forcedownload, $options);
     }
 
-    if ($context->contextlevel == CONTEXT_SYSTEM && preg_match("/^sliderimage[1-9][0-9]?$/", $filearea) !== false) {
+    if ($filearea == 'hvp') {
+        theme_moove_serve_hvp_css($args[1], $theme);
+    }
+
+    if (preg_match("/^sliderimage[1-9][0-9]?$/", $filearea) !== false) {
         return $theme->setting_file_serve($filearea, $args, $forcedownload, $options);
     }
 
-    if ($context->contextlevel == CONTEXT_SYSTEM && $filearea === 'marketing1icon') {
-        return $theme->setting_file_serve('marketing1icon', $args, $forcedownload, $options);
+    if (reg_match("marketing.*", $filearea) !== false) {
+    // if ($context->contextlevel == CONTEXT_SYSTEM && $filearea === 'marketing1icon') {
+        return $theme->setting_file_serve($filearea, $args, $forcedownload, $options);
     }
 
-    if ($context->contextlevel == CONTEXT_SYSTEM && $filearea === 'marketing2icon') {
-        return $theme->setting_file_serve('marketing2icon', $args, $forcedownload, $options);
-    }
+    // if ($filearea === 'marketing2icon') {
+    //     return $theme->setting_file_serve('marketing2icon', $args, $forcedownload, $options);
+    // }
 
-    if ($context->contextlevel == CONTEXT_SYSTEM && $filearea === 'marketing3icon') {
-        return $theme->setting_file_serve('marketing3icon', $args, $forcedownload, $options);
-    }
+    // if ($filearea === 'marketing3icon') {
+    //     return $theme->setting_file_serve('marketing3icon', $args, $forcedownload, $options);
+    // }
 
-    if ($context->contextlevel == CONTEXT_SYSTEM && $filearea === 'marketing4icon') {
-        return $theme->setting_file_serve('marketing4icon', $args, $forcedownload, $options);
-    }
-
-    send_file_not_found();
+    // if ($filearea === 'marketing4icon') {
+    //     return $theme->setting_file_serve('marketing4icon', $args, $forcedownload, $options);
+    // }
 }
 
 
@@ -191,7 +198,56 @@ function moove_write_h5p_css() {
             'filepath' => '/',                                  // any path beginning and ending in /
             'filename' => 'moove_h5p.css'                       // any filename
         ], 
-        get_config('theme_moove', "scssh5p")
     );
     theme_reset_all_caches();
+}
+
+/**
+ * Serves the H5P Custom CSS.
+ *
+ * @param string $filename The filename.
+ * @param theme_config $theme The theme config object.
+ */
+function theme_moove_serve_hvp_css($filename, $theme) {
+    global $CFG, $PAGE;
+    require_once($CFG->dirroot.'/lib/configonlylib.php'); // For min_enable_zlib_compression().
+
+    $PAGE->set_context(context_system::instance());
+    $themename = $theme->name;
+
+    $content = get_config('theme_moove', "scssh5p");
+    $md5content = md5($content);
+    $md5stored = get_config('theme_'.$themename, 'hvpccssmd5');
+    if ((empty($md5stored)) || ($md5stored != $md5content)) {
+        // Content changed, so the last modified time needs to change.
+        set_config('hvpccssmd5', $md5content, 'theme_'.$themename);
+        $lastmodified = time();
+        set_config('hvpccsslm', $lastmodified, 'theme_'.$themename);
+    } else {
+        $lastmodified = get_config('theme_'.$themename, 'hvpccsslm');
+        if (empty($lastmodified)) {
+            $lastmodified = time();
+        }
+    }
+
+    // Sixty days only - the revision may get incremented quite often.
+    $lifetime = 60 * 60 * 24 * 60;
+
+    header('HTTP/1.1 200 OK');
+
+    header('Etag: "'.$md5content.'"');
+    header('Content-Disposition: inline; filename="'.$filename.'"');
+    header('Last-Modified: '.gmdate('D, d M Y H:i:s', $lastmodified).' GMT');
+    header('Expires: '.gmdate('D, d M Y H:i:s', time() + $lifetime).' GMT');
+    header('Pragma: ');
+    header('Cache-Control: public, max-age='.$lifetime);
+    header('Accept-Ranges: none');
+    header('Content-Type: text/css; charset=utf-8');
+    if (!min_enable_zlib_compression()) {
+        header('Content-Length: '.strlen($content));
+    }
+
+    echo $content;
+
+    die;
 }
