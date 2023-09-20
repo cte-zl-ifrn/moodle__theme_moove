@@ -81,10 +81,12 @@
             }
         }
 
-        div[vw].enabled {
-            position: static;
+        div[vw] {
+            position: relative;
             transform: none !important;
             margin: 0 !important;
+            min-width: 35px;
+            min-height: 30px;
             
             .access-button {
                 width: 30px;
@@ -92,12 +94,18 @@
             }
 
             .pop-up {
+                min-width: 120px;
                 height: 30px;
             }
         }
 
         div[vw-plugin-wrapper] {
             top: 320px;
+        }
+
+        div[vw-access-button] {
+            width: 30px;
+            height: 30px;
         }
     }
 }
@@ -171,10 +179,6 @@ body.has-secondarynavigation.hasaccessibilitybar:not(.notloggedin) {
 @include media-breakpoint-down(sm) {
     #accessibilitybar {
         .bars {
-            .usertools .userway {
-                margin-right: 10px;
-            }
-
             .fontsize {
                 margin-right: auto;
             }
@@ -187,9 +191,11 @@ body.has-secondarynavigation.hasaccessibilitybar:not(.notloggedin) {
                 display: none;
             }
         }
+
         div[vw-plugin-wrapper] {
-            top: 120px !important;
             position: absolute;
+            top: 120px !important;
+            max-width: none;
         }
     }
 }
