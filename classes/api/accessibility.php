@@ -248,10 +248,10 @@ class accessibility extends external_api {
             set_user_preference('thememoovesettings_fonttype', $fonttype);
         }
 
-        $enableaccessibilitytoolbar = null;
-        if ($data['enableaccessibilitytoolbar']) {
+        $enableaccessibilitytoolbar = true; // barra de acessibilidade sempre visível
+        /* if ($data['enableaccessibilitytoolbar']) {
             $enableaccessibilitytoolbar = true;
-        }
+        } */
 
         set_user_preference('thememoovesettings_enableaccessibilitytoolbar', $enableaccessibilitytoolbar);
 

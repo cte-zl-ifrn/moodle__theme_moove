@@ -61,6 +61,8 @@
         AccessibilityBar.init();
     });
 
+    /* Script VLibras */
+    
     var scriptVLibras = document.createElement("script");
     scriptVLibras.src = "https://vlibras.gov.br/app/vlibras-plugin.js";
     document.body.appendChild(scriptVLibras);
@@ -68,6 +70,8 @@
         new window.VLibras.Widget('https://vlibras.gov.br/app');
     }
     scriptVLibras.addEventListener('load', initializeVLibras);
+
+    /* Script UserWay */
 
     (function(d){
         var s = d.createElement("script");
