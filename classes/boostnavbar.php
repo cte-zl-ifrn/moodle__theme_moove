@@ -21,6 +21,7 @@ use navigation_node;
 use moodle_url;
 use action_link;
 use lang_string;
+use html_writer;
 
 /**
  * Creates a navbar for boost that allows easy control of the navbar items.
@@ -54,6 +55,14 @@ class boostnavbar implements \renderable {
      */
     protected function prepare_nodes_for_boost(): void {
         global $PAGE;
+
+        //Modifica o estilo do shortname caso tenha no breadcrumb
+        if($this->get_item($this->page->course->id)) {       
+            $this->change_shortname_style($this->page->course->shortname);
+        }
+
+        //Caso esteja na página de participantes cria um breadcrumb
+        $this->breadcrumb_participants();
 
         // Remove the navbar nodes that already exist in the primary navigation menu.
         $this->remove_items_that_exist_in_navigation($PAGE->primarynav);
@@ -148,6 +157,33 @@ class boostnavbar implements \renderable {
 
         // Make sure that the last item is not a link. Not sure if this is always a good idea.
         $this->remove_last_item_action();
+    }
+
+    public function breadcrumb_participants() {
+        if($this->page->pagetype == 'course-view-participants') {
+            $url = new \moodle_url('/course/view.php?id='.$this->page->course->id);
+            $shortname = $this->change_shortname_style($this->page->course->shortname);
+            $linkParticipants = html_writer::tag('a',$shortname , array('href' => $url));
+            $breadcrumbParticipants = html_writer::tag('li', $linkParticipants , array('class' => 'breadcrumb-item action-item'));
+            return $breadcrumbParticipants;
+        }
+    }
+
+    protected function change_shortname_style($nomeCurto) {
+        $regexShortname = '/^(\d+\.\d+\.\d+\.\w+)\.(\w+\.\d+)(#(\d+))?$/';
+        if (preg_match($regexShortname, $nomeCurto, $matches)) {
+            $grupo_1 = $matches[1];
+            $grupo_2 = $matches[2];
+            $grupo_3 = isset($matches[3]) ? $matches[3] : "";
+        }
+        $divShortname = '';
+        $divShortname .= html_writer::tag('span', $grupo_1, array('class' => 'shortname1'));
+        $divShortname .= html_writer::tag('span', $grupo_2, array('class' => 'shortname2'));
+        $divShortname .= html_writer::tag('span', $grupo_3, array('class' => 'shortname3'));
+        if ($this->get_item($this->page->course->id)->text) {
+            $this->get_item($this->page->course->id)->text = $divShortname;
+        }
+        return $divShortname;
     }
 
     /**
