@@ -283,7 +283,7 @@ class core_renderer extends \theme_boost\output\core_renderer
      * @return string the HTML for the navbar.
      */
     public function navbar(): string {
-        $newnav = new \theme_moove\boostnavbar($this->page);
+        $newnav = new \theme_moove\moovenavbar($this->page);
         return $this->render_from_template('theme_moove/core/navbar', $newnav);
     }
 

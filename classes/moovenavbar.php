@@ -24,13 +24,13 @@ use lang_string;
 use html_writer;
 
 /**
- * Creates a navbar for boost that allows easy control of the navbar items.
+ * Creates a navbar for moove that allows easy control of the navbar items.
  *
  * @package    theme_moove
  * @copyright  2021 Adrian Greeve <adrian@moodle.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class boostnavbar implements \renderable {
+class moovenavbar implements \renderable {
 
     /** @var array The individual items of the navbar. */
     protected $items = [];
@@ -47,13 +47,13 @@ class boostnavbar implements \renderable {
         foreach ($this->page->navbar->get_items() as $item) {
             $this->items[] = $item;
         }
-        $this->prepare_nodes_for_boost();
+        $this->prepare_nodes_for_moove();
     }
 
     /**
-     * Prepares the navigation nodes for use with boost.
+     * Prepares the navigation nodes for use with moove.
      */
-    protected function prepare_nodes_for_boost(): void {
+    protected function prepare_nodes_for_moove(): void {
         global $PAGE;
 
         //Modifica o estilo do shortname caso tenha no breadcrumb
@@ -187,16 +187,16 @@ class boostnavbar implements \renderable {
     }
 
     /**
-     * Get all the boostnavbaritem elements.
+     * Get all the moovenavbaritem elements.
      *
-     * @return boostnavbaritem[] Boost navbar items.
+     * @return moovenavbaritem[] moove navbar items.
      */
     public function get_items(): array {
         return $this->items;
     }
 
     /**
-     * Removes all navigation items out of this boost navbar
+     * Removes all navigation items out of this moove navbar
      */
     protected function clear_items(): void {
         $this->items = [];
@@ -227,10 +227,10 @@ class boostnavbar implements \renderable {
     }
 
     /**
-     * Remove a boostnavbaritem from the boost navbar.
+     * Remove a moovenavbaritem from the moove navbar.
      *
-     * @param  string|int $itemkey An identifier for the boostnavbaritem
-     * @param  int|null $itemtype An additional type identifier for the boostnavbaritem (optional)
+     * @param  string|int $itemkey An identifier for the moovenavbaritem
+     * @param  int|null $itemtype An additional type identifier for the moovenavbaritem (optional)
      */
     protected function remove($itemkey, ?int $itemtype = null): void {
 
@@ -266,7 +266,7 @@ class boostnavbar implements \renderable {
         }
 
     /**
-     * Removes the action from the last item of the boostnavbaritem.
+     * Removes the action from the last item of the moovenavbaritem.
      */
     protected function remove_last_item_action(): void {
         $item = end($this->items);

@@ -1,4 +1,5 @@
 .breadcrumb {
+    margin-bottom: 12px;
     .breadcrumb-item {
         background: #DAF1DD;
         padding: 2px 18px;
@@ -8,6 +9,20 @@
         a, span {
             color: #54595E;
             text-decoration: none;
+        }
+        .shortname1 {
+            font-weight: 600;
+            color: #3c464f;
+        }
+        .shortname2 {
+            font-size: 12px;
+            font-weight: 500;
+            color: #54595E;
+            margin: 0px 5px;
+        }
+        .shortname3 {
+            font-weight: 500;
+            color: #54595E;
         }
     }
     
