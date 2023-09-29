@@ -62,6 +62,21 @@ if (file_exists($CFG->dirroot.'/h5p/classes/output/renderer.php')) {
                     $styles[] = (object) ['path' => $this->get_style_url($content), 'version' => ''];
                 }
             }
+
+            /**
+             * Alter which scripts are loaded for H5P.
+             * This is useful for adding custom scripts or replacing existing ones.
+             *
+             * @param array|object $scripts List of JavaScripts that will be loaded
+             * @param array $libraries Array of libraries indexed by the library's machineName
+             * @param string $embedtype Possible values: div, iframe, external, editor
+             */
+            public function h5p_alter_scripts(&$scripts, $libraries, $embedtype) {
+                global $CFG;
+
+                $scripts[] = (object) ['path' => $CFG->httpswwwroot . '/theme/moove/amd/src/customJSh5p.js', 'version' => '']; 
+            }
+            
         }
     }
 }
