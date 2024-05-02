@@ -170,6 +170,7 @@ class moovenavbar implements \renderable {
     }
 
     protected function change_shortname_style($nomeCurto) {
+        $nomeCurto = trim($nomeCurto);
         $regexShortname = '/^(\d+\.\d+\.\d+\.\w+)\.(\w+\.\d+)(#(\d+))?$/';
         if (preg_match($regexShortname, $nomeCurto, $matches)) {
             $grupo_1 = $matches[1];
@@ -177,9 +178,14 @@ class moovenavbar implements \renderable {
             $grupo_3 = isset($matches[3]) ? $matches[3] : "";
         }
         $divShortname = '';
-        $divShortname .= html_writer::tag('span', $grupo_1, array('class' => 'shortname1'));
-        $divShortname .= html_writer::tag('span', $grupo_2, array('class' => 'shortname2'));
-        $divShortname .= html_writer::tag('span', $grupo_3, array('class' => 'shortname3'));
+        if (empty($grupo_1) || empty($grupo_2)) {
+            $divShortname = $nomeCurto;
+        } else {
+            $divShortname .= html_writer::tag('span', $grupo_1, array('class' => 'shortname1'));
+            $divShortname .= html_writer::tag('span', $grupo_2, array('class' => 'shortname2'));
+            $divShortname .= html_writer::tag('span', $grupo_3, array('class' => 'shortname3'));
+        }
+
         if ($this->get_item($this->page->course->id)->text) {
             $this->get_item($this->page->course->id)->text = $divShortname;
         }
