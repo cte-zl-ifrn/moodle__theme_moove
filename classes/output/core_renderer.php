@@ -313,10 +313,12 @@ class core_renderer extends \theme_boost\output\core_renderer
         if (isset($contextheader->imagedata)) {
             // Header specific image.
             $html .= html_writer::div($contextheader->imagedata, 'page-header-image');
-        } elseif ($this->page->course->id !== '1') {
-            $img_attributes = array('src' => '/theme/moove/pix/course.svg', 'width' => '50', 'class' => 'page-header-image');
-            $html .= html_writer::tag('img', null, $img_attributes);
         }
+        // Imagem padrão para a página inicial do curso
+        // elseif ($this->page->course->id !== '1') {
+        //     $img_attributes = array('src' => '/theme/moove/pix/course.svg', 'width' => '50', 'class' => 'page-header-image');
+        //     $html .= html_writer::tag('img', null, $img_attributes);
+        // }
 
         // Headings.
         if (isset($contextheader->prefix)) {
