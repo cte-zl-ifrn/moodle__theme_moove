@@ -6,7 +6,6 @@
 
 body:not(.course-1) {
     .page-context-header{
-        flex-wrap: wrap;
         gap: 8px;
     }
 }
@@ -14,25 +13,6 @@ body:not(.course-1) {
 .page-header-headings {
     display: grid;
     align-content: center;
-}
-
-#shortname {
-    margin-bottom: 0px;
-    flex-basis: 100%;
-    .shortname1 {
-        font-weight: 600;
-        color: #1D2125;
-    }
-    .shortname2 {
-        font-size: 12px;
-        font-weight: 500;
-        color: #54595E;
-        margin: 0px 5px;
-    }
-    .shortname3 {
-        font-weight: 500;
-        color: #54595E;
-    }
 }
 
 #page-course-view-participants {
@@ -56,6 +36,14 @@ body:not(.course-1) {
     .gradeparent {
         overflow: scroll;
     }
+}
+
+.coursecontentblocks {
+    padding-top: 1rem;
+}
+
+.description-inner h5 {
+    margin-bottom: 0px;
 }
 
 .activity-navigation {

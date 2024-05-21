@@ -60,4 +60,26 @@
     require(['theme_moove/accessibilitybar'], function(AccessibilityBar) {
         AccessibilityBar.init();
     });
+
+    /* Script VLibras */
+    
+    var scriptVLibras = document.createElement("script");
+    scriptVLibras.src = "https://vlibras.gov.br/app/vlibras-plugin.js";
+    document.body.appendChild(scriptVLibras);
+    function initializeVLibras() {
+        new window.VLibras.Widget('https://vlibras.gov.br/app');
+    }
+    scriptVLibras.addEventListener('load', initializeVLibras);
+
+    /* Script UserWay */
+
+    (function(d){
+        var s = d.createElement("script");
+        s.setAttribute("data-position", 8);
+        s.setAttribute("data-color", "#053e67");
+        s.setAttribute("data-trigger", "userwayaccessibility");
+        s.setAttribute("data-account", "2ZijG99giv");
+        s.setAttribute("src", "https://cdn.userway.org/widget.js");
+        (d.body || d.head).appendChild(s);
+    })(document)
 {{/js}}

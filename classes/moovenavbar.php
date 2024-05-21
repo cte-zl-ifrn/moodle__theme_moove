@@ -21,15 +21,16 @@ use navigation_node;
 use moodle_url;
 use action_link;
 use lang_string;
+use html_writer;
 
 /**
- * Creates a navbar for boost that allows easy control of the navbar items.
+ * Creates a navbar for moove that allows easy control of the navbar items.
  *
  * @package    theme_moove
  * @copyright  2021 Adrian Greeve <adrian@moodle.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class boostnavbar implements \renderable {
+class moovenavbar implements \renderable {
 
     /** @var array The individual items of the navbar. */
     protected $items = [];
@@ -46,14 +47,22 @@ class boostnavbar implements \renderable {
         foreach ($this->page->navbar->get_items() as $item) {
             $this->items[] = $item;
         }
-        $this->prepare_nodes_for_boost();
+        $this->prepare_nodes_for_moove();
     }
 
     /**
-     * Prepares the navigation nodes for use with boost.
+     * Prepares the navigation nodes for use with moove.
      */
-    protected function prepare_nodes_for_boost(): void {
+    protected function prepare_nodes_for_moove(): void {
         global $PAGE;
+
+        //Modifica o estilo do shortname caso tenha no breadcrumb
+        if($this->get_item($this->page->course->id)) {       
+            $this->change_shortname_style($this->page->course->shortname);
+        }
+
+        //Caso esteja na página de participantes cria um breadcrumb
+        $this->breadcrumb_participants();
 
         // Remove the navbar nodes that already exist in the primary navigation menu.
         $this->remove_items_that_exist_in_navigation($PAGE->primarynav);
@@ -150,17 +159,50 @@ class boostnavbar implements \renderable {
         $this->remove_last_item_action();
     }
 
+    public function breadcrumb_participants() {
+        if($this->page->pagetype == 'course-view-participants') {
+            $url = new \moodle_url('/course/view.php?id='.$this->page->course->id);
+            $shortname = $this->change_shortname_style($this->page->course->shortname);
+            $linkParticipants = html_writer::tag('a',$shortname , array('href' => $url));
+            $breadcrumbParticipants = html_writer::tag('li', $linkParticipants , array('class' => 'breadcrumb-item action-item'));
+            return $breadcrumbParticipants;
+        }
+    }
+
+    protected function change_shortname_style($nomeCurto) {
+        $nomeCurto = trim($nomeCurto);
+        $regexShortname = '/^(\d+\.\d+\.\d+\.\w+)\.(\w+\.\d+)(#(\d+))?$/';
+        if (preg_match($regexShortname, $nomeCurto, $matches)) {
+            $grupo_1 = $matches[1];
+            $grupo_2 = $matches[2];
+            $grupo_3 = isset($matches[3]) ? $matches[3] : "";
+        }
+        $divShortname = '';
+        if (empty($grupo_1) || empty($grupo_2)) {
+            $divShortname = $nomeCurto;
+        } else {
+            $divShortname .= html_writer::tag('span', $grupo_1, array('class' => 'shortname1'));
+            $divShortname .= html_writer::tag('span', $grupo_2, array('class' => 'shortname2'));
+            $divShortname .= html_writer::tag('span', $grupo_3, array('class' => 'shortname3'));
+        }
+
+        if ($this->get_item($this->page->course->id)->text) {
+            $this->get_item($this->page->course->id)->text = $divShortname;
+        }
+        return $divShortname;
+    }
+
     /**
-     * Get all the boostnavbaritem elements.
+     * Get all the moovenavbaritem elements.
      *
-     * @return boostnavbaritem[] Boost navbar items.
+     * @return moovenavbaritem[] moove navbar items.
      */
     public function get_items(): array {
         return $this->items;
     }
 
     /**
-     * Removes all navigation items out of this boost navbar
+     * Removes all navigation items out of this moove navbar
      */
     protected function clear_items(): void {
         $this->items = [];
@@ -191,10 +233,10 @@ class boostnavbar implements \renderable {
     }
 
     /**
-     * Remove a boostnavbaritem from the boost navbar.
+     * Remove a moovenavbaritem from the moove navbar.
      *
-     * @param  string|int $itemkey An identifier for the boostnavbaritem
-     * @param  int|null $itemtype An additional type identifier for the boostnavbaritem (optional)
+     * @param  string|int $itemkey An identifier for the moovenavbaritem
+     * @param  int|null $itemtype An additional type identifier for the moovenavbaritem (optional)
      */
     protected function remove($itemkey, ?int $itemtype = null): void {
 
@@ -230,7 +272,7 @@ class boostnavbar implements \renderable {
         }
 
     /**
-     * Removes the action from the last item of the boostnavbaritem.
+     * Removes the action from the last item of the moovenavbaritem.
      */
     protected function remove_last_item_action(): void {
         $item = end($this->items);
